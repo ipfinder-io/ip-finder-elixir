@@ -4,7 +4,7 @@ defmodule Ipfinder.MixProject do
   def project do
     [
       app: :ipfinder,
-      version: "1.0.0",
+      version: "1.0.1",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       build_embedded: Mix.env() == :prod,
@@ -13,14 +13,14 @@ defmodule Ipfinder.MixProject do
       description: "Official elixir client library for IPfinder",
       docs: [extras: ["README.md"]],
       homepage_url: " https://ipfinder.io/",
-      source_url: "https://github.com/ipfinder-io/ip-finder-elixir",
+      source_url: "https://github.com/ipfinder-io/ip-finder-elixir"
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger,:httpotion]
+      extra_applications: [:logger, :httpotion]
     ]
   end
 
@@ -35,11 +35,11 @@ defmodule Ipfinder.MixProject do
 
   defp package do
     [
-       name: :ipfinder,
-       files: ["lib/*", "mix.exs", "README.md", "LICENSE", "CHANGELOG.md"],
-       maintainers: ["Mohamed Ben rebia <mohamed@ipfinder.io>"],
-       licenses: ["Apache-2.0"],
-       links: %{ "GitHub" => "https://github.com/ipfinder-io/ip-finder-elixir" }
-     ]
+      name: :ipfinder,
+      files: ["lib/*", "mix.exs", "README.md", "LICENSE", "CHANGELOG.md"],
+      maintainers: ["Mohamed Ben rebia <mohamed@ipfinder.io>"],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/ipfinder-io/ip-finder-elixir"}
+    ]
   end
 end
