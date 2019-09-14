@@ -5,23 +5,20 @@ defmodule Ipfinder.Validation.Asnvalidation do
 
   @moduledoc since: "1.0.0"
 
-  	@doc """
-	  Helper method for validating an argument if it is asn number
+  @doc """
+  Helper method for validating an argument if it is asn number
 
-    ## Parameters
-      * `asn` - The AS number you want details for
+  ## Parameters
+     * `asn` - The AS number you want details for
 
-  	"""
+  """
 
-  	@doc since: "1.0.0"
-	def validate(asn) do
+  @doc since: "1.0.0"
+  def validate(asn) do
+    regex = ~r/^(as|AS)(\d+)$/
 
-		regex = ~r/^(as|AS)(\d+)$/ 
-
-		if String.match?(asn,regex) == false  do
-			raise  "Invalid asn number"
-		end
-    
-	end
-
+    if String.match?(asn, regex) == false do
+      raise "Invalid asn number"
+    end
+  end
 end

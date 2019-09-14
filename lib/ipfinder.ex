@@ -1,11 +1,11 @@
 defmodule Ipfinder do
-   use HTTPotion.Base
-   alias Ipfinder.Validation.Asnvalidation 
-   alias Ipfinder.Validation.Domainvalidation
-   alias Ipfinder.Validation.Firewallvalidation
-   alias Ipfinder.Validation.Firewallvalidation
-   alias Ipfinder.Validation.Ipvalidation
- # alias Ipfinder.Validation.Tokenvalidation
+  use HTTPotion.Base
+  alias Ipfinder.Validation.Asnvalidation
+  alias Ipfinder.Validation.Domainvalidation
+  alias Ipfinder.Validation.Firewallvalidation
+  alias Ipfinder.Validation.Firewallvalidation
+  alias Ipfinder.Validation.Ipvalidation
+  # alias Ipfinder.Validation.Tokenvalidation
 
   @moduledoc """
   Documentation for Ipfinder.
@@ -13,56 +13,62 @@ defmodule Ipfinder do
 
   @moduledoc since: "1.0.0"
 
-
   # DEFAULT BASE URL
 
   @default_base_url "https://api.ipfinder.io/v1/"
 
+  def default_base_url, do: @default_base_url
 
   # The free token
 
   @default_api_token "free"
 
+  def default_api_token, do: @default_api_token
 
   # DEFAULT FORMAT
 
   @format "json"
 
+  def format, do: @format
 
   # service status path
 
   @status_path "info"
 
+  def status_path, do: @status_path
 
   # IP Address Ranges path
 
   @ranges_path "ranges/"
 
+  def ranges_path, do: @ranges_path
 
   # Firewall path
 
   @firewall_path "firewall/"
 
+  def firewall_path, do: @firewall_path
 
   # Get Domain IP path
- 
+
   @domain_path "domain/"
 
+  def domain_path, do: @domain_path
 
   # Get Domain IP history path
 
   @domain_h_path "domainhistory/"
 
+  def domain_h_path, do: @domain_h_path
 
   # Domain By ASN, Country,Ranges path
 
   @domain_by_path "domainby/"
 
+  def domain_by_path, do: @domain_by_path
 
-  defstruct [
-    token: nil,
-    baseUrl: nil
-  ]
+  defstruct token: nil,
+            baseUrl: nil
 
   @doc """
   Constructor
@@ -73,18 +79,11 @@ defmodule Ipfinder do
     * `baseUrl` - add proxy pass
   """
   def new(token \\ @default_api_token, baseUrl \\ @default_base_url) do
-
-  # Tokenvalidation.validate(token)
+    # Tokenvalidation.validate(token)
     %Ipfinder{
       token: token,
       baseUrl: baseUrl
     }
-
-  end
-
-
-  def hello do
-    :world
   end
 
   @doc """
@@ -96,20 +95,18 @@ defmodule Ipfinder do
     * `path`  - specific path of asn, IP address, ranges, Firewall,Token status
     * `format`- available format `json` `jsonp` `php` `xml`and Firewall format
   """
-  def call(this, path, format \\ @format ) do
-    
-   #  HTTPotion.post this.baseUrl, [body: "hello=" <> URI.encode("w o r l d !!"), headers: ["User-Agent": "My App", "Content-Type": "application/x-www-form-urlencoded"]]
-     #body = '{\"token\": "this.token" , \"format\" : "{format}"}'
-     body = %{"token" => this.token, "format" => format}
-     header = ["User-Agent": "IPfinder elixir-client", "Content-Type": "application/json"]
-     req = HTTPotion.post this.baseUrl <> path, [body: Jason.encode!(body), headers: header ]
+  def call(this, path, format \\ @format) do
+    #  HTTPotion.post this.baseUrl, [body: "hello=" <> URI.encode("w o r l d !!"), headers: ["User-Agent": "My App", "Content-Type": "application/x-www-form-urlencoded"]]
+    # body = '{\"token\": "this.token" , \"format\" : "{format}"}'
+    body = %{"token" => this.token, "format" => format}
+    header = ["User-Agent": "IPfinder elixir-client", "Content-Type": "application/json"]
+    req = HTTPotion.post(this.baseUrl <> path, body: Jason.encode!(body), headers: header)
 
-     if req.status_code != 200 do
-       {:error, Jason.decode!(req.error, keys: :atoms)}
-     else
-       {:ok, Jason.decode!(req.body, keys: :atoms)}
-     end
-
+    if req.status_code != 200 do
+      {:error, Jason.decode!(req.error, keys: :atoms)}
+    else
+      {:ok, Jason.decode!(req.body, keys: :atoms)}
+    end
   end
 
   @doc """
@@ -121,7 +118,7 @@ defmodule Ipfinder do
   ## Parameters
 
     * `this`  - Ipfinder
-  
+
   ## Examples
   ```ex
   {:ok, auth} = Ipfinder.authentication(Ipfinder)
@@ -130,7 +127,7 @@ defmodule Ipfinder do
 
   """
   def authentication(this) do
-    call(this,"")
+    call(this, "")
   end
 
   @doc """
@@ -139,7 +136,7 @@ defmodule Ipfinder do
 
     * `this`  - Ipfinder
     * `path`  - IP address.
-  
+
     ## Examples
     
   ```ex
@@ -147,9 +144,9 @@ defmodule Ipfinder do
 
   ```
   """
-  def getAddressInfo(this,path) do
+  def getAddressInfo(this, path) do
     Ipvalidation.validate(path)
-    call(this,path)
+    call(this, path)
   end
 
   @doc """
@@ -166,9 +163,9 @@ defmodule Ipfinder do
 
   ```
   """
-  def getAsn(this,path) do
+  def getAsn(this, path) do
     Asnvalidation.validate(path)
-    call(this,path)
+    call(this, path)
   end
 
   @doc """
@@ -182,7 +179,7 @@ defmodule Ipfinder do
   ```
   """
   def getStatus(this) do
-    call(this,@status_path)
+    call(this, @status_path)
   end
 
   @doc """
@@ -199,8 +196,8 @@ defmodule Ipfinder do
 
   ```
   """
-  def getRanges(this,path) do
-    call(this,@ranges_path <> URI.encode(path))
+  def getRanges(this, path) do
+    call(this, @ranges_path <> URI.encode(path))
   end
 
   @doc """
@@ -218,9 +215,9 @@ defmodule Ipfinder do
 
   ```
   """
-  def getFirewall(this,path,formats) do
+  def getFirewall(this, path, formats) do
     Firewallvalidation.validate(path, formats)
-    call(this,@firewall_path <> path,formats)
+    call(this, @firewall_path <> path, formats)
   end
 
   @doc """
@@ -238,9 +235,9 @@ defmodule Ipfinder do
   ```
 
   """
-  def getDomain(this,path) do
+  def getDomain(this, path) do
     Domainvalidation.validate(path)
-    call(this,@domain_path <> path)
+    call(this, @domain_path <> path)
   end
 
   @doc """
@@ -258,9 +255,9 @@ defmodule Ipfinder do
   ```
 
   """
-  def getDomainHistory(this,path) do
+  def getDomainHistory(this, path) do
     Domainvalidation.validate(path)
-    call(this,@domain_h_path <> path)
+    call(this, @domain_h_path <> path)
   end
 
   @doc """
@@ -278,8 +275,7 @@ defmodule Ipfinder do
   ```
 
   """
-  def getDomainBy(this,by) do
-    call(this,@domain_by_path <> by)
+  def getDomainBy(this, by) do
+    call(this, @domain_by_path <> by)
   end
-
 end
