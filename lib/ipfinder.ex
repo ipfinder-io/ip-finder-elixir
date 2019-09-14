@@ -20,13 +20,13 @@ defmodule Ipfinder do
   - Get Domain IP (asn, organization,country_code ....)
   - Get Domain IP history (total_ip, list_ip,organization,asn ....)
   - Get list Domain By ASN, Country,Ranges (select_by , total_domain  , list_domain ....)
-  - [GitHub](https://github.com/ipfinder-io/ip-finder-elixir)
+  - [GitHub ipfinder elixir](https://github.com/ipfinder-io/ip-finder-elixir)
   - [ipfinder](https://ipfinder.io/)
 
   ## Documentation for Ipfinder.
   """
 
-  @moduledoc since: "1.0.0"
+  @moduledoc since: "1.0.1"
 
   # DEFAULT BASE URL
 
