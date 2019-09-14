@@ -26,7 +26,7 @@ Add IPFinder  to your project's dependencies in `mix.exs`:
 ```elixir
   defp deps do
     [
-      {:ipfinder, "~> 1.0.0"}
+      {:ipfinder, "~> 1.0.1"}
     ]
   end
 
@@ -53,7 +53,7 @@ $ iex -S mix
 iex> conf = Ipfinder.new
 
 # lookup your IP address information
-iex> {:ok, auth} = Authentication(conf)
+iex> {:ok, auth} = Ipfinder.authentication(conf)
 
 auth
 # print your ip
@@ -66,7 +66,7 @@ auth.ip
 iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
 # lookup your IP address information
-iex> {:ok, auth} = Authentication(conf)
+iex> {:ok, auth} = Ipfinder.authentication(conf)
 
 iex> auth
 # print your ip
@@ -80,7 +80,7 @@ iex> auth.ip
 iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
 # GET Get details for 1.0.0.0
-iex> {:ok, ip} = getAddressInfo(conf,"1.0.0.0")
+iex> {:ok, ip} = Ipfinder.getAddressInfo(conf,"1.0.0.0")
 # print data
 ip
 ```
@@ -91,7 +91,7 @@ This API available as part of our Pro and enterprise [https://ipfinder.io/pricin
 ```elixir
 iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
-iex> {:ok, asn} = getAsn(conf,"AS1")
+iex> {:ok, asn} = Ipfinder.getAsn(conf,"AS1")
 # print data
 iex> asn
 ```
@@ -104,7 +104,7 @@ formats supported are :  `apache_allow`, `apache_deny`,`nginx_allow`,`nginx_deny
 iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
 # lookup Asn Firewall information
-iex> {:ok, fire} = getFirewall(conf,"AS1", 'nginx_deny')
+iex> {:ok, fire} = Ipfinder.getFirewall(conf,"AS1", 'nginx_deny')
 
 iex>fire
 ```
@@ -116,7 +116,7 @@ This API available as part of our  enterprise [https://ipfinder.io/pricing](http
 iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
 # lookup Organization information
-iex> {:ok, range} = getRanges(conf,"Telecom Algeria")
+iex> {:ok, range} = Ipfinder.getRanges(conf,"Telecom Algeria")
 
 iex> range
 ```
@@ -127,7 +127,7 @@ iex> range
 iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
 # lookup IP TOKEN information
-iex> {:ok, status} = getStatus(conf)
+iex> {:ok, status} = Ipfinder.getStatus(conf)
 
 iex> status
 ```
@@ -138,7 +138,7 @@ iex> status
 ```elixir
 iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
-iex> {:ok, domain} = getDomain(conf,"google.fr")
+iex> {:ok, domain} = Ipfinder.getDomain(conf,"google.fr")
 
 iex> domain
 ```
@@ -162,7 +162,7 @@ iex> conf = Ipfinder.new("YOUR_TOKEN_GOES_HERE")
 
 # list live domain by country DZ,US,TN,FR,MA
 
-iex> {:ok, by} = getDomainBy(conf,"FR")
+iex> {:ok, by} = Ipfinder.getDomainBy(conf,"FR")
 
 iex> by
 ```
